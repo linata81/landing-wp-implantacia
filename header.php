@@ -15,14 +15,24 @@
       <!-- header -->
       <header class="header">
         <div class="container header__container">
-          
-          <div class="logo header__logo">
-            <img src="<?php echo wp_get_attachment_image_url(carbon_get_theme_option('site_logo')); ?>" class="logo__img" alt="" width="150" height="73">
             
-            <?php if($GLOBALS['rost23ru']['logo_text']) : ?>
-              <span class="logo__text"><?php echo $GLOBALS['rost23ru']['logo_text']; ?></span>
-            <?php endif; ?>
-          </div>
+            <?php if(is_front_page()) : ?>
+              <div class="logo header__logo">
+                <img src="<?php echo wp_get_attachment_image_url(carbon_get_theme_option('site_logo')); ?>" class="logo__img" alt="" width="150" height="73">
+                <?php if($GLOBALS['rost23ru']['logo_text']) : ?>
+                  <span class="logo__text"><?php echo $GLOBALS['rost23ru']['logo_text']; ?></span>
+                <?php endif; ?>
+              </div>
+            <?php else : ?>
+              <a href="<?php echo get_home_url(); ?>">
+                <div class="logo header__logo">
+                  <img src="<?php echo wp_get_attachment_image_url(carbon_get_theme_option('site_logo')); ?>" class="logo__img" alt="" width="150" height="73">
+                  <?php if($GLOBALS['rost23ru']['logo_text']) : ?>
+                    <span class="logo__text"><?php echo $GLOBALS['rost23ru']['logo_text']; ?></span>
+                  <?php endif; ?>
+                </div>
+              </a>
+            <?php endif; ?>      
           
           <div class="adress header__adress">
             <img src="<?php echo get_template_directory_uri(); ?>/assets/img/svg/mark.svg" class="adress__icon" alt="Указатель" width="39" height="39">

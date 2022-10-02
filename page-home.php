@@ -11,12 +11,15 @@ Template Name: Главная
         <?php
           $top_img_id = carbon_get_post_meta($page_id, 'top_img');
           $top_img_src = wp_get_attachment_image_url($top_img_id, 'full'); 
+          $top_img_src_webp = convertToWebpSrc($top_img_src);
           $product_pros = carbon_get_post_meta($page_id, 'top_plus');
         ?>
         <section class="section-top">
           <div class="container section-top__container">
             <div class="section-top__info">
-              <h1 class="section-top__title"><?php echo apply_filters('the_content',carbon_get_post_meta( $page_id, 'top_title' )); ?></h1>
+              <div class="section-top__title">
+                <?php echo apply_filters('the_content',carbon_get_post_meta( $page_id, 'top_title' )); ?>
+              </div>
               <div class="section-top__list">
                 <?php echo apply_filters('the_content',carbon_get_post_meta( $page_id, 'top_list' )); ?>
               </div>
@@ -26,7 +29,12 @@ Template Name: Главная
               </button>
             </div>
             <div class="section-top__images">
-              <div class="section-top__img-wrap" style="background-image: url('<?php echo $top_img_src; ?>"></div>
+              <div class="section-top__img-wrap">
+                <picture>
+                  <source srcset="<?php echo $top_img_src_webp; ?>" type="image/webp">
+                  <img src="<?php echo $top_img_src; ?>" alt="">
+                </picture>
+              </div>
               <ul class="section-top__img-list">
                 
                 <?php if ($product_pros) : ?>
@@ -63,21 +71,23 @@ Template Name: Главная
           <div class="container section-benefits__container">
             <div class="section-benefits__columns">
               
-            <?php if ($benefits) : ?>
-              <?php foreach ($benefits as $item) : ?>
-                <div class="section-benefits__column">
-                  <div class="section-benefits__title"><?php echo $item['title']; ?></div>
-                  <div class="section-benefits__text">
-                    <p><?php echo $item['desc']; ?></p>
+              <?php if ($benefits) : ?>
+                <?php foreach ($benefits as $item) : ?>
+                  <div class="section-benefits__column">
+                    <div class="section-benefits__title"><?php echo $item['title']; ?></div>
+                    <div class="section-benefits__text">
+                      <p><?php echo $item['desc']; ?></p>
+                    </div>
                   </div>
-                </div>
-              <?php endforeach;?>
-            <?php endif; ?> 
+                <?php endforeach;?>
+              <?php endif; ?> 
 
             </div>
             <div class="order">
               <div class="order__description">
-                <h2 class="title order__title"><?php echo carbon_get_post_meta( $page_id, 'benefits_title' ); ?></h2>
+                <div class="title order__title">
+                  <?php echo carbon_get_post_meta( $page_id, 'benefits_title' ); ?>
+                </div>
                 <div class="order__text">
                   <?php echo apply_filters('the_content',carbon_get_post_meta( $page_id, 'benefits_text' )); ?>
                 </div>
@@ -126,7 +136,9 @@ Template Name: Главная
         ?>
         <section class="section-advice">
           <div class="container section-advice__container">
-            <h2 class="title section-advice__title"><?php echo carbon_get_post_meta( $page_id, 'advice_title' ); ?></h2>
+            <div class="title section-advice__title">
+              <?php echo carbon_get_post_meta( $page_id, 'advice_title' ); ?>
+            </div>
             <div class="section-advice__content">
               
               <?php if ($advice_items) : ?>               
@@ -156,7 +168,9 @@ Template Name: Главная
 	    	?> 
         <section class="section-visit">
           <div class="container section-visit__container">
-            <h2 class="section-visit__title"><?php echo apply_filters('the_content',carbon_get_post_meta( $page_id, 'visit_title' )); ?></h2>
+            <div class="section-visit__title">
+              <?php echo apply_filters('the_content',carbon_get_post_meta( $page_id, 'visit_title' )); ?>
+            </div>
             <div class="section-visit__content">
               <div class="section-visit__img">
                 <picture>
@@ -175,8 +189,8 @@ Template Name: Главная
                     <input class="form__input js_req" type="text" name="phone" placeholder="Телефон">
                   </div>
                   <div class="checkbox section-question__checkbox">
-                    <input type="checkbox" checked id="formAgreement" name="agreement" class="checkbox__input js_req">
-                    <label for="formAgreement" class="checkbox__label">Даю согласие на обработку персональных данных</label>
+                    <input type="checkbox" checked id="visitAgreement" name="agreement" class="checkbox__input js_req">
+                    <label for="visitAgreement" class="checkbox__label">Даю согласие на обработку персональных данных</label>
                   </div>
                   <button class="btn form__btn" type="submit"><?php echo carbon_get_post_meta( $page_id, 'visit_btn_text' ); ?></button>
                 </form>
@@ -195,7 +209,9 @@ Template Name: Главная
 		    ?>
         <section class="section-info">
           <div class="container section-info__container">
-            <h2 class="title section-info__title"><?php echo apply_filters('the_content',carbon_get_post_meta( $page_id, 'info_title' )); ?></h2>
+            <div class="title section-info__title">
+              <?php echo apply_filters('the_content',carbon_get_post_meta( $page_id, 'info_title' )); ?>
+            </div>
             <div class="section-info__content">
               <div class="section-info__boxes">
                 
@@ -232,7 +248,9 @@ Template Name: Главная
         ?>
         <section class="section-about">
           <div class="container section-about__container">
-            <h2 class="title section-about__title"><?php echo apply_filters('the_content',carbon_get_post_meta( $page_id, 'about_title' )); ?></h2>
+            <div class="title section-about__title">
+              <?php echo apply_filters('the_content',carbon_get_post_meta( $page_id, 'about_title' )); ?>
+            </div>
             <div class="section-about__content">
               <div class="section-about__row">
                 <div><?php echo apply_filters('the_content',carbon_get_post_meta( $page_id, 'about_text_left' )); ?></div>
@@ -349,10 +367,14 @@ Template Name: Главная
 		    ?> 
         <section class="section-question">
           <div class="container section-question__container">
-            <div class="section-question__subtitle"><?php echo carbon_get_post_meta( $page_id, 'question_title' ); ?></div>
+            <div class="section-question__subtitle">
+              <?php echo carbon_get_post_meta( $page_id, 'question_title' ); ?>
+            </div>
             <div class="section-question__content">
-              <form class="form section-question__form">
-                <h2 class="title section-question__title"><?php echo carbon_get_post_meta( $page_id, 'question_title_form'); ?></h2>
+              <form class="form section-question__form form--arrow">
+                <div class="title section-question__title">
+                  <?php echo carbon_get_post_meta( $page_id, 'question_title_form'); ?>
+                </div>
                 <div class="form__wrapper section-question__form-wrapper">
                   <div class="form__input-wrap">
                     <input class="form__input js_req" type="text" name="name" placeholder="Имя">
@@ -360,8 +382,8 @@ Template Name: Главная
                   </div>
                   <textarea class="form__input" name="сообщение"  placeholder="Напишите ваш вопрос"></textarea>
                   <div class="checkbox section-question__checkbox">
-                    <input type="checkbox" checked id="formAgreement" name="agreement" class="checkbox__input js_req">
-                    <label for="formAgreement" class="checkbox__label">Даю согласие на обработку персональных данных</label>
+                    <input type="checkbox" checked id="questionAgreement" name="agreement" class="checkbox__input js_req">
+                    <label for="questionAgreement" class="checkbox__label">Даю согласие на обработку персональных данных</label>
                   </div>
                   <button class="btn form__btn section-question__btn" type="submit"><?php echo carbon_get_post_meta( $page_id, 'question_btn_text' ); ?></button>
                 </div>
@@ -394,7 +416,9 @@ Template Name: Главная
         <section class="section-reparation">
           <div class="container section-reparation__container">
             <div class="section-reparation__text">
-              <h2 class="section-reparation__title"><?php echo apply_filters('the_content',carbon_get_post_meta( $page_id, 'reparation_title' )); ?></span></h2>
+              <div class="section-reparation__title">
+                <?php echo apply_filters('the_content',carbon_get_post_meta( $page_id, 'reparation_title' )); ?>
+              </div>
               <?php echo carbon_get_post_meta( $page_id, 'reparation_text' ); ?>
             </div>
             <div class="section-reparation__img">

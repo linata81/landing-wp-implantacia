@@ -33,7 +33,7 @@
             </div>
           </div>
           <div class="copyright">
-            <a href="#" class="copyright__link">Политика конфиденциальности</a>
+            <a href="<?php the_permalink(36); ?>" class="copyright__link">Политика конфиденциальности</a>
             <div><?php echo carbon_get_theme_option('site_footer_text') ?></div>
           </div>
         </div>

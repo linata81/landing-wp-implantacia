@@ -12,7 +12,7 @@ use Carbon_Fields\Field;     //подключаем класс Field
 Container::make( 'post_meta', 'Дополнительные поля' )
   ->show_on_page(7)
   ->add_tab( '1-Первый экран', [
-      Field::make( 'rich_text', 'top_title',   'Заголовок' ),
+      Field::make( 'rich_text', 'top_title',   'Заголовок H1 (серый текст - обернут в I, зеленый в B)' ),
       Field::make( 'rich_text', 'top_list',    'Список' ), 
       Field::make( 'text',      'top_btn_text','Текст кнопки' ),
       Field::make( 'complex',   'top_plus',    'Список плюсов' )
@@ -29,7 +29,7 @@ Container::make( 'post_meta', 'Дополнительные поля' )
       Field::make( 'text', 'title',  'Заголовок' ) ->set_width(50),
       Field::make( 'text',  'desc',  'Описание' )  ->set_width(50),
     ]),
-    Field::make( 'rich_text',  'benefits_title',   'Заголовок' ), 
+    Field::make( 'rich_text',  'benefits_title',   'Заголовок h2 (синий текст - обернут в В)' ), 
     Field::make( 'rich_text', 'benefits_text',     'Текст' ), 
     Field::make( 'text',      'benefits_btn_text', 'Текст кнопки' ),
     Field::make( 'image',     'benefits_img',      'Изображение' ), 
@@ -41,21 +41,21 @@ Container::make( 'post_meta', 'Дополнительные поля' )
     Field::make( 'image', 'promotion_img', 'Изображение' ), 
   ])
   ->add_tab( '4-Рекомендуем', [
-    Field::make( 'rich_text', 'advice_title',   'Заголовок' ), 
+    Field::make( 'rich_text', 'advice_title',   'Заголовок h2 (синий текст - обернут в В)' ), 
     Field::make( 'complex',   'advice_list',    'Список' )
     ->add_fields( [
       Field::make( 'text', 'desc',  'Текст' ),
     ]), 
   ])
 ->add_tab( '5-Экран визит', [
-  Field::make( 'rich_text', 'visit_title',     'Заголовок' ), 
+  Field::make( 'rich_text', 'visit_title',     'Заголовок h2 (зеленый текст - обернут в В)' ), 
   Field::make( 'rich_text', 'visit_text',     'Текст' ), 
   Field::make( 'rich_text', 'visit_list',    'Список' ), 
   Field::make( 'image',     'visit_img',      'Изображение' ),
   Field::make( 'text',      'visit_btn_text', 'Текст кнопки' ), 
   ])
 ->add_tab( '6-Экран инфо', [
-  Field::make( 'rich_text', 'info_title',          'Заголовок' ), 
+  Field::make( 'rich_text', 'info_title',    'Заголовок h2 (зеленый текст - обернут в I, синий - B)' ), 
   Field::make( 'complex',   'info_boxes',    'Текст с картинкой' )
   ->set_max(3)
   ->add_fields( [
@@ -65,7 +65,7 @@ Container::make( 'post_meta', 'Дополнительные поля' )
   Field::make( 'image',     'info_img',      'Изображение' ),
   ])
 ->add_tab( '7-О нас', [
-  Field::make( 'rich_text',  'about_title',          'Заголовок' ), 
+  Field::make( 'rich_text',  'about_title',          'Заголовок h2 (синий текст - обернут в B)' ), 
   Field::make( 'rich_text', 'about_text_left',      'Текст слева' ), 
   Field::make( 'rich_text', 'about_text_right',     'Текст справа' ), 
   Field::make( 'rich_text', 'about_text_accent',   'Акцентный текст'), 
@@ -96,8 +96,8 @@ Container::make( 'post_meta', 'Дополнительные поля' )
   Field::make( 'text',      'note_btn_text_3',      'Текст кнопки' ), 
 ])
 ->add_tab( '11-Задать вопрос', [
-  Field::make( 'rich_text', 'question_title',         'Заголовок' ), 
-  Field::make( 'rich_text', 'question_title_form',    'Заголовок формы' ), 
+  Field::make( 'rich_text', 'question_title',         'Заголовок h2 (зеленый текст - обернут в B)' ), 
+  Field::make( 'rich_text', 'question_title_form',    'Заголовок формы h2 (синий текст - обернут в B)' ), 
   Field::make( 'text',      'question_list_title',    'Заголовок списка' ), 
   Field::make( 'rich_text', 'question_ul'  ,          'Список' ), 
   Field::make( 'text',      'question_btn_text',      'Текст кнопки' ), 
@@ -106,7 +106,7 @@ Container::make( 'post_meta', 'Дополнительные поля' )
   Field::make( 'image',     'question_img',           'Изображение' ), 
 ])
 ->add_tab( '12-Возмещение', [
-  Field::make( 'rich_text', 'reparation_title',         'Заголовок' ), 
+  Field::make( 'rich_text', 'reparation_title',         'Заголовок h2 (синий текст - обернут в B)' ), 
   Field::make( 'text',      'reparation_text',          'Текст' ),
   Field::make( 'image',     'reparation_img',           'Изображение' ), 
 ]);
