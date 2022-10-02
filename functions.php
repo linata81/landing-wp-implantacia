@@ -25,6 +25,10 @@ function site_scripts() {
   wp_enqueue_style('main-style', get_stylesheet_uri(), [], $version);
   
   wp_enqueue_script('main-js', get_template_directory_uri() . '/assets/js/app.js',[], $version, true);
+  
+  wp_localize_script('main-js', 'WPJS', [
+    'ajaxUrl' => admin_url('admin-ajax.php'),
+  ]);
 }
 
 add_action('carbon_fields_register_fields', 'register_carbon_fields');
@@ -51,4 +55,55 @@ function create_global_variable() {
 function convertToWebpSrc($src) {
   $src_webp = $src . '.webp';
   return  $src_webp;
+}
+
+//отправка формы
+add_action( 'wp_ajax_send_email', 'rost23ru_send_email' );
+add_action( 'wp_ajax_nopriv_send_email', 'rost23ru_send_email' );
+
+function rost23ru_send_email() {
+  $method = $_SERVER['REQUEST_METHOD'];
+  if ($method !== 'POST') {
+    exit();
+  }
+
+  $admin_email = 'name@.tmweb.ru';
+  $form_subject = 'Заявка с сайта rost-23.ru';
+  $message = '';
+
+  $color_counter = 1;
+
+  foreach ($_POST as $key => $value) {
+    if ($value === '') {
+      continue;
+    }
+    $color = $color_counter % 2 === 0 ? '#fff' : '#f8f8f8';
+    $message .= "
+      <tr style='background-color: $color;'>
+        <td style='padding: 10px; border: 1px solid #e9e9e9;'>$key</td>
+        <td style='padding: 10px; border: 1px solid #e9e9e9;'>$value</td>
+      </tr>";
+
+    $color_counter++;
+  }
+
+  function adopt($text) {
+    return '=?utf-8?B?'.base64_encode($text).'?=';
+  }
+
+  $message = "<table style='width: 100%;'>$message</table>";
+
+  $headers  = "MIME-Version: 1.0\r\n"; 
+  $headers .= "Content-type: text/html; charset=utf-8\r\n";
+  $headers .= "From:" . adopt($form_subject) . " <$admin_email>\r\n";
+
+  $success_send = wp_mail($admin_email, adopt($form_subject), $message, $headers);
+
+  if ($success_send) {
+    echo 'success';
+  } else {
+    echo 'error';
+  }
+    
+    wp_die();
 }

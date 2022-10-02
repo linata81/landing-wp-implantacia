@@ -118,7 +118,10 @@
           return res;
         }
         
-        postData('sendmail.php', formData)
+        const url = WPJS.ajaxUrl + '?action=send_email';
+        
+        // postData("sendmail.php", formData)
+        postData(url, formData)
         .then(res => {
           if(res.ok) {
             item.reset();
@@ -126,6 +129,10 @@
             item.classList.add('js_success');
             setTimeout(() => {
               item.classList.remove('js_success');
+              if (item.closest(".form").closest(".popup")) {
+                item.closest(".form").closest("[data-modal]").style.display = "none";
+                document.body.style.overflow = "";
+              }
             }, 3000);
           }else {
             item.classList.remove('js_sending');
